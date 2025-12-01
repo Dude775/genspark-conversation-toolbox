@@ -1,3 +1,6 @@
+# 📄 README.md - גרסה מלאה ומתוקנת
+
+```markdown
 # 💬 Genspark Conversation Manager
 
 🇮🇱 **לקריאה בעברית - [לחץ כאן](README-HE.md)**
@@ -6,7 +9,7 @@
 **Advanced conversation management, search, and download tools for Genspark.ai**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-2.4-blue.svg)](https://github.com/Dude775/genspark-rtl-toolbox/releases)
+[![Version](https://img.shields.io/badge/version-2.6-blue.svg)](https://github.com/Dude775/genspark-rtl-toolbox/releases)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Extension-green.svg)](https://chromewebstore.google.com)
 
 ---
@@ -46,6 +49,13 @@
 - **Bulk download** - Export ALL saved conversations at once (JSON + TXT)
 - **Persistent storage** - Conversations stored locally in chrome.storage.local
 - **Smart indexing** - Unique conversation IDs and automatic metadata
+
+### 🌐 **Bilingual Interface**
+- **Language selection** - Choose between Hebrew (עברית) and English
+- **Complete translation** - 180+ interface elements translated
+- **RTL/LTR support** - Automatic direction switching based on language
+- **Persistent preference** - Your language choice is saved automatically
+- **Professional localization** - All buttons, labels, messages, and tooltips translated
 
 ### 🎨 **Professional Interface**
 - **Modern popup design** with intuitive controls
@@ -137,12 +147,20 @@
    - `genspark_all_conversations_YYYY-MM-DD.json` - All conversations in JSON format
    - `genspark_all_conversations_YYYY-MM-DD.txt` - All conversations in readable text format
 
+### Language Selection
+1. Click the extension icon
+2. In the header, click your preferred language button:
+   - **עברית** - Hebrew interface with RTL layout
+   - **English** - English interface with LTR layout
+3. Your choice is saved automatically for future sessions
+
 ### Quick Tips
 - Use **Enter key** for faster searching
 - Search supports both **Hebrew and English**
 - **Switch between search modes** using the toggle buttons:
   - 💬 **In-Conversation** - Search current conversation only
   - 📋 **All Conversations** - Search across sidebar conversations
+- **Choose your language** - Switch between Hebrew/English in the header, preference saved automatically
 - **Save important conversations** for later reference
 - **View saved conversations count** in the stats panel
 - **Bulk download all** your saved conversations at once
@@ -181,7 +199,7 @@
 ### Project Structure
 ```
 genspark-conversation-manager/
-├── manifest.json          # Extension configuration (v2.4)
+├── manifest.json          # Extension configuration (v2.6)
 ├── content.js            # Search, download, and extraction logic
 ├── popup.html           # Extension popup interface
 ├── popup.js             # Popup functionality and search UI
@@ -203,22 +221,23 @@ cd genspark-rtl-toolbox
 2. No build process required - load directly in Chrome
 3. For production: Create ZIP of all files except README files
 
-### Key Changes from v2.3
-- ❌ **Removed** RTL algorithm (not needed for Genspark)
-- ✅ **Fixed** download duplication bug
-- ✅ **Added** full-text search with highlighting
-- ✅ **Improved** download button organization
-- ✅ **Enhanced** user interface with search panel
+### Key Changes from v2.5
+- ✅ **Added** complete bilingual support (Hebrew/English)
+- ✅ **Removed** on-screen download button
+- ✅ **Implemented** 180+ translation keys
+- ✅ **Added** automatic RTL/LTR direction switching
+- ✅ **Enhanced** user interface with language selector
 
 ---
 
-1. הורד או שכפל את התוסף.
-2. טען כתוסף בדפדפן דרך מצב מפתחים.
-3. השתמש בממשק להורדות ולחיפוש.
+## 🐛 Troubleshooting
 
-## תצורה
+### Common Issues
 
-ניתן להגדיר הגדרות ברירת מחדל ב-background.js.
+**Extension not working on Genspark.ai?**
+- Refresh the page after installation
+- Make sure you're on genspark.ai (not other domains)
+- Check that the extension is enabled in Chrome
 
 **Search not finding results?**
 - Make sure the conversation has loaded completely
@@ -235,6 +254,11 @@ cd genspark-rtl-toolbox
 - Make sure you're connected (green status indicator)
 - Try clicking "רענן נתונים" (Refresh Data)
 - Reload the Genspark.ai page
+
+**Language not switching?**
+- Make sure you clicked the language button
+- Refresh the popup if needed
+- Check browser console for errors
 
 ---
 
@@ -258,7 +282,17 @@ cd genspark-rtl-toolbox
 
 ## 📋 Changelog
 
-### v2.5 (Current) - November 2024
+### v2.6 - December 2024
+- ✅ **NEW: Bilingual Support** - Complete Hebrew/English language selection:
+  - 🌐 Language toggle buttons in header
+  - 180+ translation keys for full interface
+  - Automatic RTL/LTR direction switching
+  - Persistent language preference storage
+  - All buttons, labels, and messages translated
+- ✅ **Removed on-screen button** - Eliminated blue download button that blocked Genspark's native UI
+- ✅ **Enhanced user experience** - Cleaner interface with professional international support
+
+### v2.5 - November 2024
 - ✅ **NEW: Conversation Manager** - Complete conversation management system:
   - 💾 Save current conversation with one click
   - 📚 View all saved conversations in organized list
@@ -325,14 +359,17 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## 🎯 Future Plans
 
 - [x] ~~Multi-conversation search~~ ✅ **Completed in v2.4**
+- [x] ~~Bilingual support~~ ✅ **Completed in v2.6**
 - [ ] Export to PDF format
 - [ ] Conversation tagging and categorization
 - [ ] Cloud sync for saved conversations
 - [ ] Advanced filters (date range, user/AI only, etc.)
 - [ ] Search history and saved searches
+- [ ] Additional language support (Spanish, French, etc.)
 
 ---
 
 **Made with ❤️ for the Genspark community**
 
 [⭐ Star this repo](https://github.com/Dude775/genspark-rtl-toolbox) | [🐛 Report Issues](https://github.com/Dude775/genspark-rtl-toolbox/issues) | [💡 Request Features](https://github.com/Dude775/genspark-rtl-toolbox/issues/new)
+```
