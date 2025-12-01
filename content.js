@@ -1,5 +1,5 @@
 /**
- * Genspark Conversation Manager v2.5 - Content Script
+ * Genspark Conversation Manager v2.6 - Content Script
  * ניהול מתקדם של שיחות Genspark - הורדה, חיפוש, שמירה וניהול שיחות
  */
 
@@ -74,7 +74,7 @@ class GensparkRTLToolbox {
     async init() {
         if (this.isInitialized) return;
 
-        console.log('🚀 Genspark Conversation Manager v2.5 מתחיל...');
+        console.log('🚀 Genspark Conversation Manager v2.6 מתחיל...');
 
         // המתן לטעינת הדף
         if (document.readyState === 'loading') {
@@ -87,11 +87,10 @@ class GensparkRTLToolbox {
     }
 
     setup() {
-        this.addDownloadButton();
         this.setupMessageListeners();
         this.observeChanges();
 
-        console.log('✅ Genspark Conversation Manager v2.5 הופעל בהצלחה');
+        console.log('✅ Genspark Conversation Manager v2.6 הופעל בהצלחה');
     }
 
     // זיהוי הודעות עם סלקטורים מרובים
@@ -314,54 +313,6 @@ class GensparkRTLToolbox {
 
         // חזור לכותרת הדף
         return document.title || 'genspark_conversation';
-    }
-
-    // הוספת כפתור הורדה
-    addDownloadButton() {
-        // הסר כפתור קיים אם יש
-        const existingButton = document.getElementById('genspark-download-btn');
-        if (existingButton) {
-            existingButton.remove();
-        }
-
-        const button = document.createElement('button');
-        button.id = 'genspark-download-btn';
-        button.innerHTML = '📥 הורד שיחה';
-        button.title = 'הורד את השיחה הנוכחית';
-
-        // עיצוב הכפתור
-        Object.assign(button.style, {
-            position: 'fixed',
-            top: '20px',
-            right: '20px',
-            zIndex: '10000',
-            backgroundColor: '#007acc',
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            padding: '12px 16px',
-            fontSize: '14px',
-            fontFamily: 'Arial, sans-serif',
-            cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-            transition: 'all 0.3s ease'
-        });
-
-        // אפקטי הובר
-        button.addEventListener('mouseenter', () => {
-            button.style.backgroundColor = '#005a9e';
-            button.style.transform = 'translateY(-2px)';
-        });
-
-        button.addEventListener('mouseleave', () => {
-            button.style.backgroundColor = '#007acc';
-            button.style.transform = 'translateY(0)';
-        });
-
-        // פונקציונליות
-        button.addEventListener('click', () => this.downloadConversation('both'));
-
-        document.body.appendChild(button);
     }
 
     // חיפוש בשיחות (בשיחה הנוכחית)
@@ -674,14 +625,7 @@ class GensparkRTLToolbox {
                 }
             });
 
-            if (shouldUpdate) {
-                // עדכן כפתור הורדה אם נעלם
-                setTimeout(() => {
-                    if (!document.getElementById('genspark-download-btn')) {
-                        this.addDownloadButton();
-                    }
-                }, 1000);
-            }
+            // שינויים נוספים יכולים להתווסף כאן במידת הצורך
         });
 
         observer.observe(document.body, {
@@ -840,6 +784,6 @@ if (typeof window !== 'undefined') {
     // וודא שהתוסף לא רץ כבר
     if (!window.gensparkConversationManager) {
         window.gensparkConversationManager = new GensparkRTLToolbox();
-        console.log('🎯 Genspark Conversation Manager v2.5 אותחל');
+        console.log('🎯 Genspark Conversation Manager v2.6 אותחל');
     }
 }

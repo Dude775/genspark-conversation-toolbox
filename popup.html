@@ -497,6 +497,39 @@
             font-size: 14px;
         }
 
+        /* Language Selector Styles */
+        .language-selector {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #6c757d;
+            min-width: 60px;
+        }
+
+        .lang-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
         @media (prefers-color-scheme: dark) {
             .content, .header {
                 background: rgba(33, 37, 41, 0.95);
@@ -513,7 +546,11 @@
 <body>
     <div class="header">
         <div class="logo">💬 Genspark Conversation Manager</div>
-        <div class="version">גרסה 2.5</div>
+        <div class="version">גרסה 2.6</div>
+        <div class="language-selector">
+            <button class="lang-btn active" id="langHe">עברית</button>
+            <button class="lang-btn" id="langEn">English</button>
+        </div>
     </div>
 
     <div class="content">
