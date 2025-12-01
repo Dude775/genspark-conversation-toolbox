@@ -1,7 +1,187 @@
 /**
- * Genspark Conversation Manager v2.4 - Popup Script
+ * Genspark Conversation Manager v2.6 - Popup Script
  * לוגיקת ממשק המשתמש של התוסף
  */
+
+// Translation System
+const translations = {
+    he: {
+        // Header
+        appName: 'Genspark Conversation Manager',
+        version: 'גרסה',
+
+        // Status
+        checkingConnection: 'בודק חיבור...',
+        searchingTab: 'מחפש טאב פעיל של Genspark...',
+        connectedSuccess: 'מחובר בהצלחה',
+        extensionActive: 'התוסף פועל',
+        notOnGenspark: 'לא בדף Genspark',
+        onlyOnGenspark: 'התוסף פועל רק באתר genspark.ai',
+        connectionError: 'שגיאת חיבור',
+        cannotConnect: 'לא ניתן להתחבר לתוסף',
+
+        // Stats
+        messagesInConv: 'הודעות בשיחה',
+        savedConversations: 'שיחות שמורות',
+
+        // Search
+        search: 'חיפוש',
+        searchInConv: 'בשיחה הנוכחית',
+        searchAll: 'בכל השיחות',
+        searchPlaceholderConv: 'הקלד טקסט או מילה לחיפוש בשיחה...',
+        searchPlaceholderAll: 'הקלד טקסט או מילה לחיפוש בכל השיחות...',
+        searchBtn: 'חפש',
+        noResults: 'לא נמצאו תוצאות',
+        searching: 'מחפש...',
+        resultsFound: 'נמצאו {count} תוצאות',
+
+        // Conversation Manager
+        conversationManager: 'מנהל שיחות',
+        saveCurrentConv: 'שמור שיחה נוכחית',
+        viewSavedConvs: 'צפה בשיחות שמורות',
+        downloadAllConvs: 'הורד את כל השיחות',
+
+        // Saved Conversations List
+        noSavedConvs: 'אין שיחות שמורות',
+        saveConvToStart: 'שמור שיחה נוכחית כדי להתחיל',
+        openConv: 'פתח שיחה',
+        deleteConv: 'מחק שיחה',
+        confirmDelete: 'האם אתה בטוח שברצונך למחוק שיחה זו?',
+        confirmDownloadAll: 'האם אתה בטוח שברצונך להוריד את כל השיחות השמורות?',
+
+        // Download Buttons
+        downloadConvBtn: 'הורד שיחה (JSON + TXT)',
+        downloadJsonBtn: 'הורד JSON בלבד',
+        downloadTxtBtn: 'הורד TXT בלבד',
+        refreshBtn: 'רענן נתונים',
+        searchInConvBtn: 'חיפוש בשיחה',
+
+        // Messages
+        downloadingConv: 'מוריד שיחה...',
+        convDownloaded: 'השיחה הורדה בהצלחה!',
+        downloadError: 'שגיאה בהורדה',
+        savingConv: 'שומר שיחה...',
+        convSaved: 'שיחה נשמרה בהצלחה!',
+        messages: 'הודעות',
+        convDeleted: 'שיחה נמחקה בהצלחה',
+        downloadingAll: 'מוריד את כל השיחות...',
+        allConvsDownloaded: '{count} שיחות הורדו בהצלחה!',
+        noConvsToDownload: 'אין שיחות שמורות להורדה',
+        openingInNewTab: 'פותח שיחה בטאב חדש...',
+        noUrlAvailable: 'אין URL זמין לשיחה זו',
+        navigatingToConv: 'מנווט לשיחה...',
+        navigationComplete: 'ניווט לשיחה הושלם',
+        navigationError: 'שגיאה בניווט לשיחה',
+        enterSearchText: 'נא להזין טקסט לחיפוש',
+        searchError: 'שגיאה בחיפוש',
+        scrollToMessage: 'גלילה להודעה',
+        refreshingData: 'מרענן נתונים...',
+        dataRefreshed: 'נתונים עודכנו',
+        noConnection: 'אין חיבור לתוסף',
+        loadingSavedConvs: 'טוען שיחות שמורות...',
+        loadingError: 'שגיאה בטעינת שיחות שמורות',
+        deleteError: 'שגיאה במחיקת שיחה',
+        saveError: 'שגיאה בשמירת שיחה',
+
+        // Match scores
+        exactMatch: 'התאמה מלאה',
+        partialMatch: 'התאמה חלקית',
+
+        // Footer
+        footerText: 'חיפוש, הורדה וניהול שיחות מתקדם',
+
+        // Loading
+        loading: 'טוען...'
+    },
+    en: {
+        // Header
+        appName: 'Genspark Conversation Manager',
+        version: 'Version',
+
+        // Status
+        checkingConnection: 'Checking connection...',
+        searchingTab: 'Searching for active Genspark tab...',
+        connectedSuccess: 'Connected successfully',
+        extensionActive: 'Extension is active',
+        notOnGenspark: 'Not on Genspark page',
+        onlyOnGenspark: 'Extension only works on genspark.ai',
+        connectionError: 'Connection error',
+        cannotConnect: 'Cannot connect to extension',
+
+        // Stats
+        messagesInConv: 'Messages in conversation',
+        savedConversations: 'Saved conversations',
+
+        // Search
+        search: 'Search',
+        searchInConv: 'In current conversation',
+        searchAll: 'In all conversations',
+        searchPlaceholderConv: 'Type text or word to search in conversation...',
+        searchPlaceholderAll: 'Type text or word to search in all conversations...',
+        searchBtn: 'Search',
+        noResults: 'No results found',
+        searching: 'Searching...',
+        resultsFound: '{count} results found',
+
+        // Conversation Manager
+        conversationManager: 'Conversation Manager',
+        saveCurrentConv: 'Save current conversation',
+        viewSavedConvs: 'View saved conversations',
+        downloadAllConvs: 'Download all conversations',
+
+        // Saved Conversations List
+        noSavedConvs: 'No saved conversations',
+        saveConvToStart: 'Save current conversation to get started',
+        openConv: 'Open conversation',
+        deleteConv: 'Delete conversation',
+        confirmDelete: 'Are you sure you want to delete this conversation?',
+        confirmDownloadAll: 'Are you sure you want to download all saved conversations?',
+
+        // Download Buttons
+        downloadConvBtn: 'Download conversation (JSON + TXT)',
+        downloadJsonBtn: 'Download JSON only',
+        downloadTxtBtn: 'Download TXT only',
+        refreshBtn: 'Refresh data',
+        searchInConvBtn: 'Search in conversation',
+
+        // Messages
+        downloadingConv: 'Downloading conversation...',
+        convDownloaded: 'Conversation downloaded successfully!',
+        downloadError: 'Download error',
+        savingConv: 'Saving conversation...',
+        convSaved: 'Conversation saved successfully!',
+        messages: 'messages',
+        convDeleted: 'Conversation deleted successfully',
+        downloadingAll: 'Downloading all conversations...',
+        allConvsDownloaded: '{count} conversations downloaded successfully!',
+        noConvsToDownload: 'No saved conversations to download',
+        openingInNewTab: 'Opening conversation in new tab...',
+        noUrlAvailable: 'No URL available for this conversation',
+        navigatingToConv: 'Navigating to conversation...',
+        navigationComplete: 'Navigation completed',
+        navigationError: 'Navigation error',
+        enterSearchText: 'Please enter text to search',
+        searchError: 'Search error',
+        scrollToMessage: 'Scroll to message',
+        refreshingData: 'Refreshing data...',
+        dataRefreshed: 'Data updated',
+        noConnection: 'No connection to extension',
+        loadingSavedConvs: 'Loading saved conversations...',
+        loadingError: 'Error loading saved conversations',
+        deleteError: 'Error deleting conversation',
+        saveError: 'Error saving conversation',
+
+        // Match scores
+        exactMatch: 'Exact match',
+        partialMatch: 'Partial match',
+
+        // Footer
+        footerText: 'Advanced search, download and conversation management',
+
+        // Loading
+        loading: 'Loading...'
+    }
+};
 
 class PopupManager {
     constructor() {
@@ -9,17 +189,172 @@ class PopupManager {
         this.currentTab = null;
         this.stats = { messageCount: 0 };
         this.currentSearchMode = 'conversation'; // 'conversation' or 'all'
+        this.currentLang = 'he'; // Default language: Hebrew
 
         this.elements = {};
         this.init();
     }
 
-    init() {
+    async init() {
+        // Load language preference
+        await this.loadLanguage();
+
         this.bindElements();
         this.attachEventListeners();
         this.checkConnection();
+        this.updateUILanguage();
 
         console.log('🎛️ Popup Manager אותחל');
+    }
+
+    async loadLanguage() {
+        try {
+            const stored = await chrome.storage.local.get(['language']);
+            this.currentLang = stored.language || 'he';
+        } catch (error) {
+            console.error('Failed to load language:', error);
+            this.currentLang = 'he';
+        }
+    }
+
+    async setLanguage(lang) {
+        if (lang !== 'he' && lang !== 'en') {
+            console.error('Invalid language:', lang);
+            return;
+        }
+
+        this.currentLang = lang;
+
+        // Save to storage
+        try {
+            await chrome.storage.local.set({ language: lang });
+        } catch (error) {
+            console.error('Failed to save language:', error);
+        }
+
+        // Update UI
+        this.updateUILanguage();
+        console.log(`Language changed to: ${lang}`);
+    }
+
+    t(key, params = {}) {
+        // Translation function
+        let text = translations[this.currentLang][key] || key;
+
+        // Replace parameters
+        Object.keys(params).forEach(paramKey => {
+            text = text.replace(`{${paramKey}}`, params[paramKey]);
+        });
+
+        return text;
+    }
+
+    updateUILanguage() {
+        // Update direction
+        const isRTL = this.currentLang === 'he';
+        document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+        document.documentElement.setAttribute('lang', this.currentLang);
+
+        // Update all text elements
+        this.updateStaticTexts();
+        this.updateButtonTexts();
+
+        // Update language selector buttons
+        if (this.elements.langHe && this.elements.langEn) {
+            this.elements.langHe.classList.toggle('active', this.currentLang === 'he');
+            this.elements.langEn.classList.toggle('active', this.currentLang === 'en');
+        }
+    }
+
+    updateStaticTexts() {
+        // Update header
+        const versionText = document.querySelector('.version');
+        if (versionText) {
+            versionText.textContent = `${this.t('version')} 2.6`;
+        }
+
+        // Update stats labels
+        const messageLabel = document.querySelector('.stat-label');
+        if (messageLabel) {
+            messageLabel.textContent = this.t('messagesInConv');
+        }
+
+        const savedLabel = document.querySelectorAll('.stat-label')[1];
+        if (savedLabel) {
+            savedLabel.textContent = this.t('savedConversations');
+        }
+
+        // Update search title
+        const searchTitle = document.querySelector('.search-title');
+        if (searchTitle) {
+            searchTitle.textContent = `🔍 ${this.t('search')}`;
+        }
+
+        // Update section title
+        const sectionTitle = document.querySelector('.section-title');
+        if (sectionTitle) {
+            sectionTitle.textContent = `📚 ${this.t('conversationManager')}`;
+        }
+
+        // Update footer
+        const footerText = document.querySelector('.footer div:last-child');
+        if (footerText) {
+            footerText.textContent = this.t('footerText');
+        }
+    }
+
+    updateButtonTexts() {
+        // Update all buttons with data-i18n attribute or specific IDs
+        if (this.elements.toggleSearchBtn) {
+            this.elements.toggleSearchBtn.innerHTML = `<span class="icon">🔍</span> ${this.t('searchInConvBtn')}`;
+        }
+
+        if (this.elements.downloadBtn) {
+            this.elements.downloadBtn.innerHTML = `<span class="icon">📥</span> ${this.t('downloadConvBtn')}`;
+        }
+
+        if (this.elements.downloadJsonBtn) {
+            this.elements.downloadJsonBtn.innerHTML = `<span class="icon">📄</span> ${this.t('downloadJsonBtn')}`;
+        }
+
+        if (this.elements.downloadTxtBtn) {
+            this.elements.downloadTxtBtn.innerHTML = `<span class="icon">📝</span> ${this.t('downloadTxtBtn')}`;
+        }
+
+        if (this.elements.refreshBtn) {
+            this.elements.refreshBtn.innerHTML = `<span class="icon">🔄</span> ${this.t('refreshBtn')}`;
+        }
+
+        if (this.elements.saveConversationBtn) {
+            this.elements.saveConversationBtn.innerHTML = `<span class="icon">💾</span> ${this.t('saveCurrentConv')}`;
+        }
+
+        if (this.elements.viewSavedBtn) {
+            this.elements.viewSavedBtn.innerHTML = `<span class="icon">📚</span> ${this.t('viewSavedConvs')}`;
+        }
+
+        if (this.elements.downloadAllBtn) {
+            this.elements.downloadAllBtn.innerHTML = `<span class="icon">📦</span> ${this.t('downloadAllConvs')}`;
+        }
+
+        if (this.elements.searchBtn) {
+            this.elements.searchBtn.innerHTML = `<span class="icon">🔎</span> ${this.t('searchBtn')}`;
+        }
+
+        if (this.elements.searchModeConversation) {
+            this.elements.searchModeConversation.textContent = `💬 ${this.t('searchInConv')}`;
+        }
+
+        if (this.elements.searchModeAll) {
+            this.elements.searchModeAll.textContent = `📋 ${this.t('searchAll')}`;
+        }
+
+        // Update placeholders
+        if (this.elements.searchInput) {
+            this.elements.searchInput.placeholder = this.currentSearchMode === 'conversation'
+                ? this.t('searchPlaceholderConv')
+                : this.t('searchPlaceholderAll');
+        }
     }
 
     bindElements() {
@@ -42,6 +377,15 @@ class PopupManager {
             searchResults: document.getElementById('searchResults'),
             searchModeConversation: document.getElementById('searchModeConversation'),
             searchModeAll: document.getElementById('searchModeAll'),
+            managerSection: document.getElementById('managerSection'),
+            saveConversationBtn: document.getElementById('saveConversationBtn'),
+            viewSavedBtn: document.getElementById('viewSavedBtn'),
+            downloadAllBtn: document.getElementById('downloadAllBtn'),
+            savedConversationsContainer: document.getElementById('savedConversationsContainer'),
+            savedConversationsList: document.getElementById('savedConversationsList'),
+            closeSaved: document.getElementById('closeSaved'),
+            langHe: document.getElementById('langHe'),
+            langEn: document.getElementById('langEn'),
             loading: document.getElementById('loading'),
             message: document.getElementById('message')
         };
@@ -98,6 +442,35 @@ class PopupManager {
         // מצב חיפוש - בכל השיחות
         this.elements.searchModeAll?.addEventListener('click', () => {
             this.setSearchMode('all');
+        });
+
+        // כפתור שמירת שיחה
+        this.elements.saveConversationBtn?.addEventListener('click', () => {
+            this.saveConversation();
+        });
+
+        // כפתור צפייה בשיחות שמורות
+        this.elements.viewSavedBtn?.addEventListener('click', () => {
+            this.viewSavedConversations();
+        });
+
+        // כפתור הורדת כל השיחות
+        this.elements.downloadAllBtn?.addEventListener('click', () => {
+            this.downloadAllConversations();
+        });
+
+        // כפתור סגירת רשימת שיחות שמורות
+        this.elements.closeSaved?.addEventListener('click', () => {
+            this.closeSavedConversations();
+        });
+
+        // Language selection buttons
+        this.elements.langHe?.addEventListener('click', () => {
+            this.setLanguage('he');
+        });
+
+        this.elements.langEn?.addEventListener('click', () => {
+            this.setLanguage('en');
         });
     }
 
@@ -790,4 +1163,4 @@ window.addEventListener('error', (event) => {
 });
 
 // Log לצורך דיבוג
-console.log('🎮 Genspark Conversation Manager Popup v2.4 נטען');
+console.log('🎮 Genspark Conversation Manager Popup v2.6 נטען');
